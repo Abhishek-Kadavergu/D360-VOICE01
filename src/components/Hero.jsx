@@ -2,14 +2,16 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
 import { TiLocationArrow } from "react-icons/ti";
-import { useEffect, useRef, useState } from "react";
 import { FiCheckCircle } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 import Button from "./Button";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   useGSAP(() => {
     gsap.from("#hero-content > *", {
       y: 50,
@@ -61,18 +63,20 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 mt-4">
-            <Button
-              id="get-started"
-              title="Get Started"
-              rightIcon={<TiLocationArrow />}
-              containerClass="!bg-gradient-to-r !from-blue-500 !to-purple-600 !text-white border-0 hover:scale-105 transition-transform duration-300 animate-pulse-glow"
-            />
+            <div onClick={() => navigate("/contact-us")} className="w-full sm:w-auto">
+              <Button
+                id="get-started"
+                title="Get Started"
+                rightIcon={<TiLocationArrow />}
+                containerClass="w-full justify-center !bg-gradient-to-r !from-blue-500 !to-purple-600 !text-white border-0 hover:scale-105 transition-transform duration-300 animate-pulse-glow"
+              />
+            </div>
             
-            <button className="group relative z-10 w-fit cursor-pointer overflow-hidden rounded-full border border-blue-400/50 bg-transparent px-7 py-3 text-blue-100 hover:bg-blue-400/10 transition-colors duration-300">
+            <a href="#about" className="group relative w-full sm:w-auto z-10 flex items-center justify-center cursor-pointer overflow-hidden rounded-full border border-blue-400/50 bg-transparent px-7 py-3 text-blue-100 hover:bg-blue-400/10 transition-colors duration-300">
               <span className="relative inline-flex items-center gap-2 font-general text-xs uppercase tracking-wider">
                 Watch Demo
               </span>
-            </button>
+            </a>
           </div>
         </div>
 

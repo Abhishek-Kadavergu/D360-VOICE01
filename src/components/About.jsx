@@ -30,8 +30,8 @@ const About = () => {
   return (
     <div id="about" className="min-h-screen w-screen">
       <div className="relative z-30 mb-16 mt-36 flex flex-col items-center gap-5 px-4">
-        <p className="font-general text-sm uppercase md:text-[10px]">
-          Smart Conversations. Real Insights.
+        <p className="font-general text-sm uppercase md:text-[10px] tracking-[0.2em] font-semibold">
+          Welcome to the Intelligence Layer.
         </p>
 
         <AnimatedTitle
