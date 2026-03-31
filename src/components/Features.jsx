@@ -31,14 +31,17 @@ export const BentoTilt = ({ children, className = "" }) => {
       className={className}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ transform: transformStyle, transition: transformStyle ? "none" : "transform 0.5s ease-out" }}
+      style={{
+        transform: transformStyle,
+        transition: transformStyle ? "none" : "transform 0.5s ease-out",
+      }}
     >
       {children}
     </div>
   );
 };
 
-export const BentoCard = ({ src, title, description }) => {
+export const BentoCard = ({ src, title, description, isImage = false }) => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [hoverOpacity, setHoverOpacity] = useState(0);
   const cardRef = useRef(null);
@@ -57,7 +60,7 @@ export const BentoCard = ({ src, title, description }) => {
   const handleMouseLeave = () => setHoverOpacity(0);
 
   return (
-    <div 
+    <div
       ref={cardRef}
       className="relative size-full group overflow-hidden bg-black/40 rounded-2xl border border-white/5"
       onMouseMove={handleMouseMove}
@@ -72,16 +75,24 @@ export const BentoCard = ({ src, title, description }) => {
           background: `radial-gradient(400px circle at ${cursorPosition.x}px ${cursorPosition.y}px, rgba(99,102,241,0.15), transparent 80%)`,
         }}
       />
-      
-      <video
-        src={src}
-        loop
-        muted
-        autoPlay
-        playsInline
-        className="absolute left-0 top-0 size-full object-cover object-center scale-100 group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100"
-      />
-      
+
+      {isImage ? (
+        <img
+          src={src}
+          alt={title ? "feature image" : ""}
+          className="absolute left-0 top-0 size-full object-cover object-center scale-100 group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100"
+        />
+      ) : (
+        <video
+          src={src}
+          loop
+          muted
+          autoPlay
+          playsInline
+          className="absolute left-0 top-0 size-full object-cover object-center scale-100 group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100"
+        />
+      )}
+
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 transition-opacity duration-500"></div>
 
       <div className="relative z-30 flex size-full flex-col justify-end p-6 sm:p-8 text-blue-50 h-full">
@@ -107,11 +118,13 @@ const Features = () => (
           Next-Gen Platform
         </p>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black font-general text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-purple-200 leading-tight max-w-3xl">
-          The Future of AI <br className="hidden sm:block md:hidden xl:block" /> Communication Starts Here.
+          The Future of AI <br className="hidden sm:block md:hidden xl:block" />{" "}
+          Communication Starts Here.
         </h2>
         <p className="max-w-2xl font-circular-web text-base sm:text-lg lg:text-lg text-blue-100/60 mt-4 leading-relaxed">
           Experience a new era of communication where every conversation becomes
-          data, insights, and decisions — powered by self-improving AI primitives.
+          data, insights, and decisions — powered by self-improving AI
+          primitives.
         </p>
       </div>
 
@@ -120,7 +133,11 @@ const Features = () => (
         <BentoTilt className="h-72 sm:h-80 lg:h-[45vh] xl:h-[55vh] w-full rounded-2xl shadow-[0_0_40px_rgba(99,102,241,0.1)] hover:shadow-[0_0_60px_rgba(99,102,241,0.2)] transition-shadow duration-500">
           <BentoCard
             src="videos/feature-1.mp4"
-            title={<>AI Vo<b>i</b>ce Agent</>}
+            title={
+              <>
+                AI Vo<b>i</b>ce Agent
+              </>
+            }
             description="A human-like AI that answers calls, understands sentiment, and resolves complex inquiries in real-time."
           />
         </BentoTilt>
@@ -128,24 +145,38 @@ const Features = () => (
         <div className="grid h-auto lg:h-[45vh] xl:h-[55vh] w-full grid-cols-1 md:grid-cols-3 gap-6">
           <BentoTilt className="h-72 lg:h-full md:col-span-1 border-white/5 shadow-lg shadow-black">
             <BentoCard
-              src="videos/video-3.mp4"
-              title={<>Ins<b>i</b>ght Engine</>}
+              src="/images/image03.png"
+              isImage
+              title={
+                <>
+                  Ins<b>i</b>ght Engine
+                </>
+              }
               description="Extracts key information like user intent, sentiment, and core requirements from every single conversation."
             />
           </BentoTilt>
 
           <BentoTilt className="h-72 lg:h-full md:col-span-1 border-white/5 shadow-lg shadow-black">
             <BentoCard
-              src="videos/video-4.mp4"
-              title={<>Smart R<b>o</b>uting</>}
+              src="videos/video-3.mp4"
+              title={
+                <>
+                  Smart R<b>o</b>uting
+                </>
+              }
               description="Automatically routes structured insights to the right team, CRM, or dynamic automated workflow."
             />
           </BentoTilt>
 
           <BentoTilt className="h-72 lg:h-full md:col-span-1 border-white/5 shadow-lg shadow-black">
             <BentoCard
-              src="videos/video-5.mp4"
-              title={<>Analyt<b>i</b>cs</>}
+              src="/images/image03.png"
+              isImage
+              title={
+                <>
+                  Analyt<b>i</b>cs
+                </>
+              }
               description="Track global performance, view AI call summaries, and unlock actionable business intelligence effortlessly."
             />
           </BentoTilt>
