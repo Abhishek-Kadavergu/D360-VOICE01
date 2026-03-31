@@ -111,7 +111,7 @@ const FloatingImage = () => {
               smarter decisions. Welcome to D360 Voice.
             </p>
 
-            <Button id="realm-btn" title="Learn more" containerClass="mt-5" />
+            {/* <Button id="realm-btn" title="Learn more" containerClass="mt-5" /> */}
           </div>
         </div>
       </div>

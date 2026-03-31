@@ -7,7 +7,10 @@ const Contact = () => {
   const navigate = useNavigate();
 
   return (
-    <div id="contact" className="relative min-h-[70vh] w-screen px-6 sm:px-10 py-24 bg-black overflow-hidden flex items-center justify-center">
+    <div
+      id="contact"
+      className="relative min-h-[70vh] w-screen px-6 sm:px-10 py-24 bg-black overflow-hidden flex items-center justify-center"
+    >
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] sm:w-[50vw] sm:h-[50vw] bg-indigo-600/20 rounded-full blur-[120px] mix-blend-screen animate-pulse-glow pointer-events-none"></div>
@@ -15,7 +18,6 @@ const Contact = () => {
       </div>
 
       <div className="relative z-10 w-full max-w-5xl rounded-3xl border border-white/10 glassmorphism p-10 sm:p-20 flex flex-col items-center text-center overflow-hidden">
-        
         {/* Animated glowing border effect */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-indigo-500/20 opacity-30 animate-pulse"></div>
 
@@ -31,29 +33,32 @@ const Contact = () => {
           />
 
           <p className="mt-8 mb-12 max-w-2xl font-circular-web text-base sm:text-xl text-blue-100/80 leading-relaxed">
-            Join us in redefining how businesses understand, automate, and act on conversations — powered by real-time AI.
+            Join us in redefining how businesses understand, automate, and act
+            on conversations — powered by real-time AI.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto">
-            <div onClick={() => navigate("/contact-us")} className="w-full sm:w-auto">
-              <Button 
-                title="Get Started" 
+            <div
+              onClick={() => navigate("/contact-us")}
+              className="w-full sm:w-auto"
+            >
+              <Button
+                title="Get Started"
                 rightIcon={<TiLocationArrow />}
-                containerClass="w-full justify-center !bg-gradient-to-r !from-blue-500 !to-purple-600 !text-white border-0 hover:scale-105 transition-transform duration-300" 
+                containerClass="w-full justify-center !bg-gradient-to-r !from-blue-500 !to-purple-600 !text-white border-0 hover:scale-105 transition-transform duration-300"
               />
             </div>
-            
-            <button 
+
+            {/* <button 
               onClick={() => navigate("/contact-us")}
               className="w-full sm:w-auto group relative z-10 cursor-pointer overflow-hidden rounded-full border border-blue-400/50 bg-black/40 backdrop-blur-sm px-8 py-3 text-blue-100 hover:bg-blue-400/10 hover:border-blue-400 transition-all duration-300"
             >
               <span className="relative inline-flex items-center gap-2 font-general text-xs sm:text-sm uppercase tracking-wider font-semibold">
                 Contact Us
               </span>
-            </button>
+            </button> */}
           </div>
         </div>
-
       </div>
     </div>
   );
