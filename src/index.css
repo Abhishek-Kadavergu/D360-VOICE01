@@ -83,7 +83,7 @@ body::-webkit-scrollbar {
   }
 
   .animated-title {
-    @apply flex flex-col gap-1 text-7xl uppercase leading-[.8] text-white sm:px-32 md:text-[6rem];
+    @apply flex flex-col gap-1 text-5xl md:text-6xl lg:text-7xl xl:text-[5rem] uppercase leading-[.8] text-white px-4 sm:px-10 lg:px-32;
   }
 
   .animated-word {

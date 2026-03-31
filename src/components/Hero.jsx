@@ -53,19 +53,19 @@ const Hero = () => {
             </p>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-black font-general text-transparent bg-clip-text bg-gradient-to-r from-blue-100 via-indigo-200 to-purple-200 leading-tight tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-[5rem] font-black font-general text-transparent bg-clip-text bg-gradient-to-r from-blue-100 via-indigo-200 to-purple-200 leading-tight tracking-tight">
             Smart <br className="hidden xl:block" /> Conversations. <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
               Real Insights.
             </span>
           </h1>
 
-          <p className="text-lg sm:text-xl md:text-2xl text-blue-100/90 font-medium max-w-xl mt-2 lg:max-w-2xl">
+          <p className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-blue-100/90 font-medium mt-2 max-w-xl lg:max-w-xl">
             Turn every call into actionable intelligence with AI-powered voice
             analysis.
           </p>
 
-          <p className="text-base sm:text-lg text-blue-100/60 font-robert-regular max-w-lg lg:max-w-xl">
+          <p className="text-base sm:text-lg lg:text-base xl:text-lg text-blue-100/60 font-robert-regular max-w-lg lg:max-w-lg">
             Automate compliance, extract intelligence, and boost team efficiency
             in real-time.
           </p>
@@ -99,7 +99,7 @@ const Hero = () => {
           id="hero-image"
           className="w-full lg:w-[45%] xl:w-[40%] flex justify-center lg:justify-end relative"
         >
-          <div className="relative w-full max-w-[500px] aspect-square lg:aspect-auto lg:h-[600px] animate-float">
+          <div className="relative w-full max-w-[420px] xl:max-w-[500px] aspect-square lg:aspect-auto lg:h-[450px] xl:h-[550px] animate-float">
             {/* Premium Container glow */}
             <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 to-purple-500/20 rounded-3xl transform rotate-3 scale-105 blur-lg"></div>
 

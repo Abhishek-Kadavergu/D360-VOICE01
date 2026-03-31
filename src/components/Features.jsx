@@ -106,18 +106,18 @@ const Features = () => (
           <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
           Next-Gen Platform
         </p>
-        <h2 className="text-4xl sm:text-5xl md:text-7xl font-black font-general text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-purple-200 leading-[1.1] max-w-4xl">
-          The Future of AI <br/> Communication Starts Here.
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black font-general text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-purple-200 leading-tight max-w-3xl">
+          The Future of AI <br className="hidden sm:block md:hidden xl:block" /> Communication Starts Here.
         </h2>
-        <p className="max-w-2xl font-circular-web text-base sm:text-xl text-blue-100/60 mt-6 leading-relaxed">
+        <p className="max-w-2xl font-circular-web text-base sm:text-lg lg:text-lg text-blue-100/60 mt-4 leading-relaxed">
           Experience a new era of communication where every conversation becomes
           data, insights, and decisions — powered by self-improving AI primitives.
         </p>
       </div>
 
-      <div className="flex flex-col gap-6 w-full">
+      <div className="flex flex-col gap-6 w-full lg:max-w-6xl xl:max-w-full mx-auto">
         {/* Top Full Width Feature */}
-        <BentoTilt className="h-80 sm:h-96 md:h-[60vh] w-full rounded-2xl shadow-[0_0_40px_rgba(99,102,241,0.1)] hover:shadow-[0_0_60px_rgba(99,102,241,0.2)] transition-shadow duration-500">
+        <BentoTilt className="h-72 sm:h-80 lg:h-[45vh] xl:h-[55vh] w-full rounded-2xl shadow-[0_0_40px_rgba(99,102,241,0.1)] hover:shadow-[0_0_60px_rgba(99,102,241,0.2)] transition-shadow duration-500">
           <BentoCard
             src="videos/feature-1.mp4"
             title={<>AI Vo<b>i</b>ce Agent</>}
@@ -125,8 +125,8 @@ const Features = () => (
           />
         </BentoTilt>
 
-        <div className="grid h-auto md:h-[60vh] w-full grid-cols-1 md:grid-cols-3 gap-6">
-          <BentoTilt className="h-80 md:h-full md:col-span-1 border-white/5 shadow-lg shadow-black">
+        <div className="grid h-auto lg:h-[45vh] xl:h-[55vh] w-full grid-cols-1 md:grid-cols-3 gap-6">
+          <BentoTilt className="h-72 lg:h-full md:col-span-1 border-white/5 shadow-lg shadow-black">
             <BentoCard
               src="videos/video-3.mp4"
               title={<>Ins<b>i</b>ght Engine</>}
@@ -134,7 +134,7 @@ const Features = () => (
             />
           </BentoTilt>
 
-          <BentoTilt className="h-80 md:h-full md:col-span-1 border-white/5 shadow-lg shadow-black">
+          <BentoTilt className="h-72 lg:h-full md:col-span-1 border-white/5 shadow-lg shadow-black">
             <BentoCard
               src="videos/video-4.mp4"
               title={<>Smart R<b>o</b>uting</>}
@@ -142,7 +142,7 @@ const Features = () => (
             />
           </BentoTilt>
 
-          <BentoTilt className="h-80 md:h-full md:col-span-1 border-white/5 shadow-lg shadow-black">
+          <BentoTilt className="h-72 lg:h-full md:col-span-1 border-white/5 shadow-lg shadow-black">
             <BentoCard
               src="videos/video-5.mp4"
               title={<>Analyt<b>i</b>cs</>}
