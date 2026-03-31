@@ -68,7 +68,7 @@ const FloatingImage = () => {
                   onMouseUp={handleMouseLeave}
                   onMouseEnter={handleMouseLeave}
                   // src="/img/entrance.webp"
-                  src="/images/image05.jpg"
+                  src="/images/image10.png"
                   alt="entrance.webp"
                   className="object-contain"
                 />
@@ -111,11 +111,7 @@ const FloatingImage = () => {
               smarter decisions. Welcome to D360 Voice.
             </p>
 
-            <Button
-              id="realm-btn"
-              title="Learn more"
-              containerClass="mt-5"
-            />
+            <Button id="realm-btn" title="Learn more" containerClass="mt-5" />
           </div>
         </div>
       </div>
