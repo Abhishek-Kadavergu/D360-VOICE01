@@ -170,7 +170,7 @@ export const BentoCard = ({
       <div className="relative z-30 flex size-full flex-col justify-end p-6 sm:p-8 text-blue-50 h-full">
         <div
           className={clsx(
-            "transform transition-transform duration-500",
+            "transition-transform duration-500",
             mobileActive
               ? "translate-y-0"
               : "translate-y-4 group-hover:translate-y-0"
