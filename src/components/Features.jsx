@@ -1,12 +1,28 @@
-import { useState, useRef } from "react";
-import { TiLocationArrow } from "react-icons/ti";
+import {
+  useState,
+  useRef,
+  useEffect,
+  Children,
+  cloneElement,
+  isValidElement,
+} from "react";
+import clsx from "clsx";
+import { useMedia } from "react-use";
+
+/** Matches Tailwind `md` breakpoint (viewports smaller than `md` are treated as mobile here). */
+const MOBILE_MEDIA = "(max-width: 767px)";
+
+const MOBILE_TILT =
+  "perspective(1000px) rotateX(3deg) rotateY(-3deg) scale3d(.98, .98, .98)";
 
 export const BentoTilt = ({ children, className = "" }) => {
   const [transformStyle, setTransformStyle] = useState("");
+  const [isInView, setIsInView] = useState(false);
   const itemRef = useRef(null);
+  const isMobile = useMedia(MOBILE_MEDIA);
 
   const handleMouseMove = (event) => {
-    if (!itemRef.current) return;
+    if (!itemRef.current || isMobile) return;
 
     const { left, top, width, height } =
       itemRef.current.getBoundingClientRect();
@@ -25,6 +41,36 @@ export const BentoTilt = ({ children, className = "" }) => {
     setTransformStyle("");
   };
 
+  useEffect(() => {
+    if (!isMobile) {
+      setIsInView(false);
+      return;
+    }
+    const el = itemRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.35, rootMargin: "0px 0px -8% 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isMobile]);
+
+  const effectiveTransform = isMobile
+    ? isInView
+      ? MOBILE_TILT
+      : ""
+    : transformStyle;
+
+  const effectiveTransition = isMobile
+    ? "transform 0.5s ease-out"
+    : transformStyle
+      ? "none"
+      : "transform 0.5s ease-out";
+
   return (
     <div
       ref={itemRef}
@@ -32,19 +78,30 @@ export const BentoTilt = ({ children, className = "" }) => {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
-        transform: transformStyle,
-        transition: transformStyle ? "none" : "transform 0.5s ease-out",
+        transform: effectiveTransform,
+        transition: effectiveTransition,
       }}
     >
-      {children}
+      {Children.map(children, (child) =>
+        isValidElement(child)
+          ? cloneElement(child, { inView: isMobile && isInView })
+          : child
+      )}
     </div>
   );
 };
 
-export const BentoCard = ({ src, title, description, isImage = false }) => {
+export const BentoCard = ({
+  src,
+  title,
+  description,
+  isImage = false,
+  inView = false,
+}) => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [hoverOpacity, setHoverOpacity] = useState(0);
   const cardRef = useRef(null);
+  const isMobile = useMedia(MOBILE_MEDIA);
 
   const handleMouseMove = (event) => {
     if (!cardRef.current) return;
@@ -59,6 +116,9 @@ export const BentoCard = ({ src, title, description, isImage = false }) => {
   const handleMouseEnter = () => setHoverOpacity(1);
   const handleMouseLeave = () => setHoverOpacity(0);
 
+  const mobileActive = isMobile && inView;
+  const glowOpacity = mobileActive ? 0.55 : hoverOpacity;
+
   return (
     <div
       ref={cardRef}
@@ -69,10 +129,12 @@ export const BentoCard = ({ src, title, description, isImage = false }) => {
     >
       {/* Dynamic Glow background */}
       <div
-        className="pointer-events-none absolute -inset-px opacity-0 transition duration-500 z-20 mix-blend-screen"
+        className="pointer-events-none absolute -inset-px transition duration-500 z-20 mix-blend-screen"
         style={{
-          opacity: hoverOpacity,
-          background: `radial-gradient(400px circle at ${cursorPosition.x}px ${cursorPosition.y}px, rgba(99,102,241,0.15), transparent 80%)`,
+          opacity: glowOpacity,
+          background: mobileActive
+            ? "radial-gradient(400px circle at 50% 45%, rgba(99,102,241,0.2), transparent 80%)"
+            : `radial-gradient(400px circle at ${cursorPosition.x}px ${cursorPosition.y}px, rgba(99,102,241,0.15), transparent 80%)`,
         }}
       />
 
@@ -80,7 +142,12 @@ export const BentoCard = ({ src, title, description, isImage = false }) => {
         <img
           src={src}
           alt={title ? "feature image" : ""}
-          className="absolute left-0 top-0 size-full object-cover object-center scale-100 group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100"
+          className={clsx(
+            "absolute left-0 top-0 size-full object-cover object-center transition-transform duration-700",
+            mobileActive
+              ? "scale-105 opacity-100"
+              : "scale-100 opacity-80 group-hover:scale-105 group-hover:opacity-100"
+          )}
         />
       ) : (
         <video
@@ -89,18 +156,37 @@ export const BentoCard = ({ src, title, description, isImage = false }) => {
           muted
           autoPlay
           playsInline
-          className="absolute left-0 top-0 size-full object-cover object-center scale-100 group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100"
+          className={clsx(
+            "absolute left-0 top-0 size-full object-cover object-center transition-transform duration-700",
+            mobileActive
+              ? "scale-105 opacity-100"
+              : "scale-100 opacity-80 group-hover:scale-105 group-hover:opacity-100"
+          )}
         />
       )}
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 transition-opacity duration-500"></div>
 
       <div className="relative z-30 flex size-full flex-col justify-end p-6 sm:p-8 text-blue-50 h-full">
-        <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+        <div
+          className={clsx(
+            "transform transition-transform duration-500",
+            mobileActive
+              ? "translate-y-0"
+              : "translate-y-4 group-hover:translate-y-0"
+          )}
+        >
           <h1 className="bento-title special-font tracking-tight leading-none mb-3 drop-shadow-lg text-transparent bg-clip-text bg-gradient-to-r from-blue-50 to-blue-200">
             {title}
           </h1>
-          <p className="max-w-md text-sm sm:text-base font-circular-web text-blue-100/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 drop-shadow-md">
+          <p
+            className={clsx(
+              "max-w-md text-sm sm:text-base font-circular-web text-blue-100/70 transition-opacity duration-500 delay-100 drop-shadow-md",
+              mobileActive
+                ? "opacity-100"
+                : "opacity-0 group-hover:opacity-100"
+            )}
+          >
             {description}
           </p>
         </div>
