@@ -8,9 +8,12 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import ContactUs from "./pages/ContactUs";
 
+import VideoSection from "./components/VideoSection";
+
 const Home = () => (
   <>
     <Hero />
+    {/* <VideoSection /> */}
     <About />
     <Features />
     <Story />
@@ -27,7 +30,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/contact-us" element={<ContactUs />} />
         </Routes>
-        <Footer /> 
+        <Footer />
       </main>
     </Router>
   );
