@@ -132,7 +132,8 @@ const Features = () => (
         {/* Top Full Width Feature */}
         <BentoTilt className="h-72 sm:h-80 lg:h-[45vh] xl:h-[55vh] w-full rounded-2xl shadow-[0_0_40px_rgba(99,102,241,0.1)] hover:shadow-[0_0_60px_rgba(99,102,241,0.2)] transition-shadow duration-500">
           <BentoCard
-            src="videos/feature-1.mp4"
+            src="/images/image12.png"
+            isImage
             title={
               <>
                 AI Vo<b>i</b>ce Agent
